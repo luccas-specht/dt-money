@@ -1,43 +1,20 @@
 import { useTransactions } from '../../hooks/index';
+import { formatToLocalCurrency, formatToLocalDate } from '../../utils';
 
 import { Container } from './styles';
 
 export const TransactionsTable = () => {
   const { transactions } = useTransactions();
 
-  const headers = ['Título', 'Valor', 'Categoria', 'Data'];
-
-  const availableLanguages = {
-    brazil: {
-      key: 'pt-BR',
-      name: 'Portuguese',
-      formatter: {
-        style: 'currency',
-        currency: 'BRL',
-      },
-    },
-  };
-
-  const formatToLocalCurrency = (amount: number) =>
-    new Intl.NumberFormat(
-      availableLanguages.brazil.key,
-      availableLanguages.brazil.formatter
-    ).format(amount);
-
-  const formatToLocalDate = (date: string) =>
-    new Intl.DateTimeFormat(availableLanguages.brazil.key).format(
-      new Date(date)
-    );
+  const headersInPtBR = ['Título', 'Valor', 'Categoria', 'Data'];
 
   const renderTransactions = () =>
-    transactions.map((transaction) => (
-      <tr key={transaction.id}>
-        <td>{transaction.title}</td>
-        <td className={transaction.type}>
-          {formatToLocalCurrency(transaction.amount)}
-        </td>
-        <td>{transaction.category}</td>
-        <td>{formatToLocalDate(transaction.createdAt)}</td>
+    transactions.map(({ id, type, title, amount, category, createdAt }) => (
+      <tr key={id}>
+        <td>{title}</td>
+        <td className={type}>{formatToLocalCurrency(amount)}</td>
+        <td>{category}</td>
+        <td>{formatToLocalDate(createdAt)}</td>
       </tr>
     ));
 
@@ -46,7 +23,7 @@ export const TransactionsTable = () => {
       <table>
         <thead>
           <tr>
-            {headers.map((header) => (
+            {headersInPtBR.map((header) => (
               <th>{header}</th>
             ))}
           </tr>
