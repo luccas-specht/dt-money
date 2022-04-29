@@ -31,9 +31,9 @@ export const Container = styled.div`
       color: #ffffff;
       background: linear-gradient(
         to right,
-        var(--orange) 0%,
-        var(--orange-light) 51%,
-        var(--orange) 100%
+        var(--blue) 0%,
+        var(--blue-light) 51%,
+        var(--blue) 100%
       );
     }
   }
