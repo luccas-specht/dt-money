@@ -22,7 +22,7 @@ export const NewTransactionModal = ({
 
   const [type, setType] = useState('deposit');
   const [title, setTitle] = useState('');
-  const [amount, setAmout] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState('');
 
   async function handleCreateNewTransaction(event: FormEvent) {
@@ -32,7 +32,7 @@ export const NewTransactionModal = ({
 
     setType('deposit');
     setTitle('');
-    setAmout(0);
+    setAmount(0);
     setCategory('');
     onRequestClose();
   }
@@ -66,7 +66,7 @@ export const NewTransactionModal = ({
           type="number"
           placeholder="Valor"
           value={amount}
-          onChange={({ target }) => setAmout(Number(target.value))}
+          onChange={({ target }) => setAmount(Number(target.value))}
         />
 
         <TransactionTypeContainer>
